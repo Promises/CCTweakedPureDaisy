@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "lib": ["esnext"],
+        "moduleResolution": "node",
+        "types": ["cc-tweaked-types"],
+        "typeRoots": [
+            "node_modules/@types",
+            "node_modules/lua-types",
+            "node_modules/cc-tweaked-types",
+        ],
+        "strict": true,
+        "rootDir": "src",
+        "outDir": "build"
+    },
+    "tstl": {
+        "luaTarget": "JIT",
+        "luaLibImport": "require",
+        "sourceMapTraceback": false,
+        "noImplicitSelf": true
+    }
+  }

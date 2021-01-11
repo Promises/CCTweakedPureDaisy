@@ -1,0 +1,32 @@
+{
+  "name": "tscraft",
+  "version": "1.0.0",
+  "description": "An attempt at making a template that will allow Programming for the Minecraft ComputerCraft Mod in Typescript",
+  "main": "src/main.ts",
+  "scripts": {
+    "build": "tstl",
+    "watch": "tstl --watch",
+    "test": "echo \"Error: no testing method specified yet\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eforen/TSCraft.git"
+  },
+  "keywords": [
+    "typescript",
+    "lua",
+    "computercraft",
+    "minecraft"
+  ],
+  "author": "Eforen (Ariel Lothlorien)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Eforen/TSCraft/issues"
+  },
+  "homepage": "https://github.com/Eforen/TSCraft#readme",
+  "dependencies": {
+    "lua-types": "^2.8.0",
+    "typescript": "^4.1.3",
+    "typescript-to-lua": "^0.36.1"
+  }
+}
