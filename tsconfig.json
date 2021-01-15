@@ -1,22 +1,43 @@
 {
     "compilerOptions": {
-        "target": "esnext",
-        "lib": ["esnext"],
-        "moduleResolution": "node",
-        "types": ["cc-tweaked-types"],
+        "target": "es6",
+        "moduleResolution": "classic",
+        "types": ["cc-tweaked-types",
+            "lua-types/core/coroutine",
+            "lua-types/core/global",
+            "lua-types/core/math",
+            "lua-types/core/metatable",
+            "lua-types/core/modules",
+            "lua-types/core/string",
+            "lua-types/core/table",
+            "lua-types/core/os",
+            "lua-types/special/5.3"
+        ],
+        "lib": [
+            "es6"
+        ],
+        "plugins": [
+            {
+                "transform": "war3-transformer"
+            }
+        ],
         "typeRoots": [
             "node_modules/@types",
             "node_modules/lua-types",
-            "node_modules/cc-tweaked-types",
+            "node_modules/cc-tweaked-types"
         ],
-        "strict": true,
-        "rootDir": "src",
-        "outDir": "build"
+        "rootDir": "src/",
+        "outDir": "dist"
     },
+    "include": [
+        "src"
+    ],
+    "exclude": [],
     "tstl": {
-        "luaTarget": "JIT",
+        "luaTarget": "5.3",
         "luaLibImport": "require",
-        "sourceMapTraceback": false,
-        "noImplicitSelf": true
+        "noImplicitSelf": true,
+        "luaBundle": "dist/tstl_output.lua",
+        "luaBundleEntry": "./src/main.ts"
     }
   }

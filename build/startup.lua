@@ -1,4 +1,3 @@
---[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 w, h = term.getSize()
 function printCentered(y, s)
     local x = math.floor((w - #s) / 2)
