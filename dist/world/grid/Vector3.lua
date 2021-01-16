@@ -1,4 +1,3 @@
---[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
 ____exports.Vector3 = __TS__Class()
