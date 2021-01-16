@@ -1,4 +1,5 @@
 require("lualib_bundle");
+__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 1,["6"] = 2,["7"] = 2,["8"] = 4,["9"] = 5,["10"] = 6,["12"] = 8,["13"] = 9,["15"] = 11,["16"] = 12,["18"] = 14,["19"] = 15,["21"] = 4,["22"] = 19,["23"] = 20,["24"] = 19});
 local ____exports = {}
 local ____turtle = require("world.turtle")
 local Direction = ____turtle.Direction
