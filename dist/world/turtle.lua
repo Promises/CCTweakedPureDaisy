@@ -1,12 +1,12 @@
 --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
-local ____items = require("World.items")
+local ____items = require("world.items")
 local ItemLookup = ____items.ItemLookup
 local Items = ____items.Items
-local ____Vector3 = require("World.grid.Vector3")
+local ____Vector3 = require("world.grid.Vector3")
 local Vector3 = ____Vector3.Vector3
-local ____utils = require("World.utils.utils")
+local ____utils = require("world.utils.utils")
 local getCoordInDirection = ____utils.getCoordInDirection
 local ____block = require("block")
 local Block = ____block.Block

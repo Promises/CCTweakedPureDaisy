@@ -1,9 +1,9 @@
 --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
-local ____turtle = require("World.turtle")
+local ____turtle = require("world.turtle")
 local Direction = ____turtle.Direction
-local ____Vector3 = require("World.grid.Vector3")
+local ____Vector3 = require("world.grid.Vector3")
 local Vector3 = ____Vector3.Vector3
 function ____exports.getCoordInDirection(source, direction)
     if direction == Direction.North then
