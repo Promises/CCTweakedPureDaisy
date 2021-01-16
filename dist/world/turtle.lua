@@ -1,9 +1,6 @@
 --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
-local ____items = require("world.items")
-local ItemLookup = ____items.ItemLookup
-local Items = ____items.Items
 local ____Vector3 = require("world.grid.Vector3")
 local Vector3 = ____Vector3.Vector3
 local ____utils = require("world.utils.utils")
@@ -110,69 +107,6 @@ function Turtle.prototype.walk(self, steps)
         end
     end
 end
-function Turtle.prototype.walkToBarrel(self, barrel)
-    self:walkTo(barrel.x, barrel.z)
-end
-function Turtle.prototype.walkTo(self, x, y)
-    while x ~= self.currentX do
-        if self.currentX > x then
-            self:setDirection(____exports.Direction.East)
-        else
-            self:setDirection(____exports.Direction.West)
-        end
-        self:walk(
-            math.abs(self.currentX - x)
-        )
-    end
-    while y ~= self.currentZ do
-        if self.currentZ > y then
-            self:setDirection(____exports.Direction.North)
-        else
-            self:setDirection(____exports.Direction.South)
-        end
-        self:walk(
-            math.abs(self.currentZ - y)
-        )
-    end
-end
-function Turtle.prototype.cleanInventory(self)
-    if self:hasItems() then
-        do
-            local i = 0
-            while i < 16 do
-                if self.inventory[i + 1] then
-                    self:returnItemToBarrel(i)
-                end
-                i = i + 1
-            end
-        end
-    end
-    self:refreshInventory()
-end
-function Turtle.prototype.returnItemToBarrel(self, slot, forceUpdate)
-    if forceUpdate == nil then
-        forceUpdate = false
-    end
-    local invItem = self.inventory[slot + 1]
-    local barrel = ItemLookup[invItem.name]
-    self:walkToBarrel(barrel)
-    turtle.select(slot + 1)
-    if (barrel.y ~= nil) and (math.abs(self.currentY - barrel.y) ~= 0) then
-        if self.currentY > barrel.y then
-            turtle.dropDown()
-        else
-            turtle.dropUp()
-        end
-    elseif barrel.y ~= nil then
-        turtle.dropDown()
-    else
-        turtle.drop()
-    end
-    os.sleep(0.1)
-    if forceUpdate then
-        self:refreshInventory()
-    end
-end
 function Turtle.prototype.dropDown(self, slot, forceUpdate)
     if forceUpdate == nil then
         forceUpdate = false
@@ -182,34 +116,6 @@ function Turtle.prototype.dropDown(self, slot, forceUpdate)
     os.sleep(0.1)
     if forceUpdate then
         self:refreshInventory()
-    end
-end
-function Turtle.prototype.getItem(self, item)
-    self:walkToBarrel(item)
-    if (item.y ~= nil) and (math.abs(self.currentY - item.y) ~= 0) then
-        if self.currentY > item.y then
-            turtle.suckDown()
-        else
-            turtle.suckUp()
-        end
-    elseif item.y == nil then
-        print("wtf?")
-        turtle.suckDown()
-    else
-        print("WTF!!!?")
-        turtle.suck()
-    end
-    os.sleep(0.1)
-    self:refreshInventory()
-    if __TS__ArrayFindIndex(
-        self.inventory,
-        function(____, i) return i and (i.name == item.name) end
-    ) == -1 then
-        print(
-            ("unable to aquire: " .. tostring(item.name)) .. ", sleeping."
-        )
-        sleep(60)
-        self:getItem(item)
     end
 end
 function Turtle.prototype.digDown(self)
@@ -243,16 +149,6 @@ function Turtle.prototype.selectItem(self, item)
     end
     return turtle.select(slot + 1)
 end
-function Turtle.prototype.refuel(self)
-    self:cleanInventory()
-    self:getItem(Items.Coal)
-    self:selectItem(Items.Coal.name)
-    turtle.refuel()
-    os.sleep(0.1)
-end
-function Turtle.prototype.shouldRefuel(self)
-    return turtle.getFuelLevel() < 10000
-end
 function Turtle.prototype.getBlockDown(self)
     local block = {
         turtle.inspectDown()
@@ -260,7 +156,7 @@ function Turtle.prototype.getBlockDown(self)
     if block[1] then
         return block[2].name
     end
-    return ""
+    return "minecraft:air"
 end
 function Turtle.prototype.getBlockUp(self)
     local block = {
@@ -269,7 +165,7 @@ function Turtle.prototype.getBlockUp(self)
     if block[1] then
         return block[2].name
     end
-    return ""
+    return "minecraft:air"
 end
 function Turtle.prototype.getBlock(self)
     local block = {
@@ -278,7 +174,7 @@ function Turtle.prototype.getBlock(self)
     if block[1] then
         return block[2].name
     end
-    return ""
+    return "minecraft:air"
 end
 function Turtle.prototype.placeDownSlot(self, slot)
     if slot == nil then
