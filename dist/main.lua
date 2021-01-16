@@ -1,7 +1,7 @@
 --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
-local ____turtle = require("World.turtle")
+local ____turtle = require("world.turtle")
 local Turtle = ____turtle.Turtle
 local dataJson = Turtle:findData()
 if dataJson then
