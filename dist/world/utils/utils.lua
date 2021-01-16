@@ -19,4 +19,7 @@ function ____exports.getCoordInDirection(source, direction)
         return __TS__New(Vector3, source.x - 1, source.y, source.z)
     end
 end
+function ____exports.log(s)
+    print(s)
+end
 return ____exports
