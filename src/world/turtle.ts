@@ -1,8 +1,7 @@
-// @noSelfInFile
-import {BarrelItem, ItemLookup, Items} from "./items";
-import {Vector3} from "./grid/Vector3";
-import {getCoordInDirection} from "./utils/utils";
+/** @noSelfInFile **/
 import {Block} from "../block";
+import {stringToDirection} from "./direction";
+import {Client} from "../client";
 
 export enum Direction {
     North,
@@ -11,7 +10,14 @@ export enum Direction {
     East,
 }
 
-interface WorldData {
+export const VerboseDirection = [
+    "North",
+    "West",
+    "South",
+    "East",
+]
+
+export interface WorldData {
     facing: 'north' | 'east' | 'south' | 'west';
     x: number;
     y: number;
@@ -21,14 +27,18 @@ interface WorldData {
 }
 
 export class Turtle {
-
     currentX: number;
     currentZ: number;
     currentY: number;
     currentDirection: Direction;
     inventory: ({ name: string, count: number } | null)[] = [];
 
-    constructor() {
+    constructor(configFile: string) {
+        let worldData = Client.loadConfigFile(configFile);
+        this.currentDirection = stringToDirection(worldData.facing);
+        this.currentX = worldData.x;
+        this.currentY = worldData.y;
+        this.currentZ = worldData.z;
         this.refreshInventory();
     }
 
@@ -96,94 +106,12 @@ export class Turtle {
         }
     }
 
-    public walkToBarrel(barrel: BarrelItem) {
-        this.walkTo(barrel.x, barrel.z);
-    }
-
-    public walkTo(x: number, y: number) {
-        while (x !== this.currentX) {
-            if (this.currentX > x) {
-                this.setDirection(Direction.East);
-            } else {
-                this.setDirection(Direction.West)
-            }
-            this.walk(Math.abs(this.currentX - x))
-        }
-        while (y !== this.currentZ) {
-            if (this.currentZ > y) {
-                this.setDirection(Direction.North);
-            } else {
-                this.setDirection(Direction.South)
-            }
-            this.walk(Math.abs(this.currentZ - y))
-        }
-    }
-
-    public
-
-    public cleanInventory() {
-        if (this.hasItems()) {
-            for (let i = 0; i < 16; i++) {
-                if (this.inventory[i]) {
-                    this.returnItemToBarrel(i);
-                }
-            }
-        }
-        this.refreshInventory();
-    }
-
-    public returnItemToBarrel(slot: number, forceUpdate: boolean = false) {
-        let invItem = this.inventory[slot];
-        let barrel: BarrelItem = ItemLookup[invItem.name];
-        this.walkToBarrel(barrel)
-        turtle.select(slot + 1);
-        if (barrel.y != undefined && math.abs(this.currentY - barrel.y) != 0) {
-            if (this.currentY > barrel.y) {
-                turtle.dropDown();
-            } else {
-                turtle.dropUp();
-            }
-        } else if (barrel.y != undefined) {
-            turtle.dropDown();
-        } else {
-            turtle.drop();
-        }
-        os.sleep(0.1)
-        if (forceUpdate) {
-            this.refreshInventory();
-        }
-    }
-
     public dropDown(slot: number, forceUpdate: boolean = false) {
         turtle.select(slot + 1);
         turtle.dropDown();
         os.sleep(0.1)
         if (forceUpdate) {
             this.refreshInventory();
-        }
-    }
-
-    public getItem(item: BarrelItem) {
-        this.walkToBarrel(item);
-        if (item.y != undefined && math.abs(this.currentY - item.y) != 0) {
-            if (this.currentY > item.y) {
-                turtle.suckDown();
-            } else {
-                turtle.suckUp();
-            }
-        } else if (item.y === undefined) {
-            print("wtf?");
-            turtle.suckDown();
-        } else {
-            print("WTF!!!?");
-            turtle.suck();
-        }
-        os.sleep(0.1);
-        this.refreshInventory();
-        if (this.inventory.findIndex((i) => i && i.name === item.name) === -1) {
-            print(`unable to aquire: ${item.name}, sleeping.`)
-            sleep(60);
-            this.getItem(item);
         }
     }
 
@@ -218,43 +146,31 @@ export class Turtle {
         return turtle.select(slot + 1);
     }
 
-    public refuel() {
-        this.cleanInventory();
-        this.getItem(Items.Coal);
-        this.selectItem(Items.Coal.name);
-        turtle.refuel();
-        os.sleep(0.1);
-    }
-
-    public shouldRefuel(): boolean {
-        return turtle.getFuelLevel() < 10000;
-    }
-
-    getBlockDown(): string {
+    public getBlockDown(): string {
         let block = turtle.inspectDown();
         if (block[0]) {
             return block[1].name;
         }
-        return '';
+        return 'minecraft:air';
     }
 
-    getBlockUp(): string {
+    public getBlockUp(): string {
         let block = turtle.inspectUp();
         if (block[0]) {
             return block[1].name;
         }
-        return '';
+        return 'minecraft:air';
     }
 
-    getBlock(): string {
+    public getBlock(): string {
         let block = turtle.inspect();
         if (block[0]) {
             return block[1].name;
         }
-        return '';
+        return 'minecraft:air';
     }
 
-    placeDownSlot(slot: number = 1) {
+    public placeDownSlot(slot: number = 1) {
         turtle.select(slot);
         turtle.placeDown()
         os.sleep(0.1)
@@ -292,43 +208,6 @@ export class Turtle {
                         }
                         turtle.turnLeft();
                     }
-
-                    //     fs.copy(`/${Turtle.getDiskDrive()}/location.json`, "/data/location.json");
-                    //     if (fs.exists("/data/location.json")) {
-                    //         let fileHandle = fs.open("/data/location.json", 'r')[0];
-                    //
-                    //         if (fileHandle) {
-                    //             let rawStr = fileHandle.readAll()
-                    //             fileHandle.close()
-                    //             let worldData: WorldData = textutils.unserializeJSON(rawStr)[0];
-                    //             let coordOfDiskDrive = new Vector3(worldData.x, worldData.y, worldData.z);
-                    //             // let opposite = directionFromString(worldData.facing)
-                    //             // print(`${oppositeDirection}`);
-                    //             // let turtleCoord = getCoordInDirection(coordOfDiskDrive, directionFromString(worldData.facing) + 2 % 4);
-                    //             let turtleCoord;
-                    //             if (worldData.facing === "north") {
-                    //                 turtleCoord = getCoordInDirection(coordOfDiskDrive, Direction.South);
-                    //             } else if (worldData.facing === "east") {
-                    //                 turtleCoord = getCoordInDirection(coordOfDiskDrive, Direction.West);
-                    //             } else if (worldData.facing === "south") {
-                    //                 turtleCoord = getCoordInDirection(coordOfDiskDrive, Direction.North);
-                    //             } else if (worldData.facing === "west") {
-                    //                 turtleCoord = getCoordInDirection(coordOfDiskDrive, Direction.East);
-                    //             }
-                    //             //
-                    //             let writeHandle: FileHandle = fs.open("/data/location.json", 'w')[0];
-                    //             writeHandle.write(textutils.serializeJSON({
-                    //                 ...worldData,
-                    //                 x: coordOfDiskDrive.x,
-                    //                 y: coordOfDiskDrive.y,
-                    //                 z: coordOfDiskDrive.z
-                    //             }));
-                    //             writeHandle.close()
-                    //             return "/data/location.json";
-                    //         }
-                    //     }
-                    // }
-
                 }
             } else {
                 print("couldnt find lapis block")
@@ -346,37 +225,6 @@ export class Turtle {
 
     static configFromDrive(path: string) {
         fs.copy(path, "/data/location.json");
-        let fileHandle = fs.open("/data/location.json", 'r')[0];
-                if (fileHandle) {
-                    let rawStr = fileHandle.readAll()
-                    fileHandle.close()
-                    let worldData: WorldData = textutils.unserializeJSON(rawStr)[0];
-                    let coordOfDiskDrive = new Vector3(worldData.x, worldData.y, worldData.z);
-                    // let opposite = directionFromString(worldData.facing)
-                    // print(`${oppositeDirection}`);
-                    // let turtleCoord = getCoordInDirection(coordOfDiskDrive, directionFromString(worldData.facing) + 2 % 4);
-                    let turtleCoord;
-                    if (worldData.facing === "north") {
-                        turtleCoord = getCoordInDirection(coordOfDiskDrive, Direction.South);
-                    } else if (worldData.facing === "east") {
-                        turtleCoord = getCoordInDirection(coordOfDiskDrive, Direction.West);
-                    } else if (worldData.facing === "south") {
-                        turtleCoord = getCoordInDirection(coordOfDiskDrive, Direction.North);
-                    } else if (worldData.facing === "west") {
-                        turtleCoord = getCoordInDirection(coordOfDiskDrive, Direction.East);
-                    }
-                    //
-                    let writeHandle: FileHandle = fs.open("/data/location.json", 'w')[0];
-                    writeHandle.write(textutils.serializeJSON({
-                        ...worldData,
-                        x: turtleCoord.x,
-                        y: turtleCoord.y,
-                        z: turtleCoord.z
-                    }));
-                    writeHandle.close()
-                    return "/data/location.json";
-                }
-        //     }
-        // }
+        return "/data/location.json";
     }
 }

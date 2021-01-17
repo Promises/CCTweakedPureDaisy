@@ -1,13 +1,25 @@
-import {Direction, Turtle} from "./World/turtle";
-import {BarrelItem, Items} from "./World/items";
-import {Grid} from "./World/grid/grid";
-//
-const t = new Turtle();
+import {Turtle} from "./world/turtle";
+import {Client} from "./client";
 
+let dataJson = Turtle.findData();
 
-parallel.waitForAll(() => {
-}, () => {
-})
+if(dataJson) {
+    if(dataJson.startsWith('/disk')){
+        print(Turtle.configFromDrive(`/${Turtle.getDiskDrive()}/location.json`));
+    }
+}
+
+let c = new Client(dataJson);
+c.connectSocket();
+
+if(c.websocket) {
+    parallel.waitForAll(()=> c.listener(), () => {
+        while (true) {
+            turtle.turnLeft();
+        }
+    })
+}
+print("not connected")
 
 
 

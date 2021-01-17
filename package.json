@@ -4,7 +4,7 @@
   "description": "An attempt at making a template that will allow Programming for the Minecraft ComputerCraft Mod in Typescript",
   "main": "src/main.ts",
   "scripts": {
-    "build": "ts-node --transpile-only scripts/build.ts",
+    "build": "tstl",
     "watch": "tstl --watch",
     "test": "echo \"Error: no testing method specified yet\" && exit 1"
   },

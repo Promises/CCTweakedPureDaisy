@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "es6",
-        "moduleResolution": "classic",
+        "target": "esnext",
+        "moduleResolution": "node",
         "types": ["cc-tweaked-types",
             "lua-types/core/coroutine",
             "lua-types/core/global",
@@ -11,16 +11,12 @@
             "lua-types/core/string",
             "lua-types/core/table",
             "lua-types/core/os",
-            "lua-types/special/5.3"
+            "lua-types/special/jit"
         ],
         "lib": [
-            "es6"
+            "esnext"
         ],
-        "plugins": [
-            {
-                "transform": "war3-transformer"
-            }
-        ],
+
         "typeRoots": [
             "node_modules/@types",
             "node_modules/lua-types",
@@ -34,10 +30,12 @@
     ],
     "exclude": [],
     "tstl": {
-        "luaTarget": "5.3",
-        "luaLibImport": "require",
+        "luaTarget": "JIT",
+        "luaLibImport": "always",
+        "noHeader": true,
         "noImplicitSelf": true,
-        "luaBundle": "dist/tstl_output.lua",
-        "luaBundleEntry": "./src/main.ts"
+        "sourceMapTraceback": true,
+//        "luaBundle": "dist/tstl_output.lua",
+//        "luaBundleEntry": "./src/main.ts"
     }
   }
