@@ -29,7 +29,7 @@ function Client.prototype.listenForTerminate(self)
     repeat
         do
             print(
-                os.pullEvent("key")
+                os.pullEvent("key")[2]
             )
         end
     until not true
