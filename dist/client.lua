@@ -28,8 +28,10 @@ function Client.prototype.listenForTerminate(self)
     local key
     repeat
         do
-            local input = os.pullEvent("key")
-            print(input)
+            local input = os.pullEvent("key")[2]
+            print(
+                "" .. tostring(input)
+            )
         end
     until not true
 end
