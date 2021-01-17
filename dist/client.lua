@@ -25,7 +25,7 @@ end
 function Client.prototype.connectSocket(self)
     local ws = {
         http.websocket(
-            (("ws://" .. tostring(self.websocketAddress)) .. "\"") .. tostring(self.websocketPort)
+            (("ws://" .. tostring(self.websocketAddress)) .. ":") .. tostring(self.websocketPort)
         )
     }
     if ws[1] then
