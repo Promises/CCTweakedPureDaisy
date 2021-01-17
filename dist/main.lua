@@ -23,7 +23,7 @@ do
         function()
             c:connectSocket()
             if c.websocket then
-                parallel.waitForAny(
+                parallel.waitForAll(
                     function() return c:listener() end,
                     function() return c:listenForTerminate() end
                 )

@@ -34,6 +34,7 @@ function Client.prototype.listenForTerminate(self)
             key = b[2]
         end
     until not (key ~= 84)
+    self.running = false
 end
 function Client.prototype.connectSocket(self)
     local url = (("ws://" .. tostring(self.websocketAddress)) .. ":") .. tostring(self.websocketPort)
