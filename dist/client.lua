@@ -1,6 +1,8 @@
 require("lualib_bundle");
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 3,["5"] = 3,["6"] = 3,["7"] = 11,["8"] = 15,["9"] = 15,["10"] = 15,["11"] = 16,["12"] = 17,["13"] = 17,["14"] = 17,["15"] = 17,["17"] = 18,["18"] = 19,["19"] = 20,["20"] = 21,["23"] = 25,["24"] = 26,["26"] = 11});
+__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 2,["5"] = 2,["6"] = 4,["7"] = 4,["8"] = 4,["9"] = 12,["10"] = 16,["11"] = 16,["12"] = 16,["13"] = 17,["14"] = 18,["15"] = 18,["16"] = 18,["17"] = 18,["19"] = 19,["20"] = 20,["21"] = 21,["22"] = 21,["23"] = 21,["24"] = 21,["25"] = 21,["26"] = 22,["29"] = 26,["30"] = 27,["32"] = 12});
 local ____exports = {}
+local ____direction = require("world.direction")
+local stringToDirection = ____direction.stringToDirection
 ____exports.Client = __TS__Class()
 local Client = ____exports.Client
 Client.name = "Client"
@@ -16,7 +18,11 @@ function Client.prototype.____constructor(self, configPath)
         }
         if raw[1] then
             local data = raw[1]
-            print(data.facing)
+            print(
+                "" .. tostring(
+                    stringToDirection(data.facing)
+                )
+            )
             print(data.server)
         end
     end
