@@ -19,7 +19,7 @@ function Client.prototype.listener(self)
     while self.running do
         self:handleAction(
             ({
-                self.websocket.receive()
+                self.websocket.receive(10)
             })[1]
         )
     end
