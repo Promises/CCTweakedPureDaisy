@@ -4,7 +4,7 @@ local ____turtle = require("world.turtle")
 local Turtle = ____turtle.Turtle
 local ____client = require("client")
 local Client = ____client.Client
-print("starting v0.0.1")
+print("starting v0.0.2")
 local dataJson = Turtle:findData()
 if dataJson then
     if __TS__StringStartsWith(dataJson, "/disk") then
@@ -25,11 +25,7 @@ do
             if c.websocket then
                 parallel.waitForAll(
                     function() return c:listener() end,
-                    function()
-                        while true do
-                            turtle.turnLeft()
-                        end
-                    end
+                    function() return c:listenForTerminate() end
                 )
             else
                 print("not connected")
