@@ -1,7 +1,7 @@
 function download(file)
   print("downloading " .. file)
   fs.delete(file)
-  local content = http.get("https://raw.githubusercontent.com/Promises/CCTweakedPureDaisy/master/dist/" .. file).readAll()
+  local content = http.get("https://gitcdn.link/repo/Promises/CCTweakedPureDaisy/master/dist/" .. file).readAll()
   if not content then
         error("Could not connect to website")
   end
