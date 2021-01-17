@@ -31,7 +31,7 @@ function Client.prototype.listenForTerminate(self)
             local b = {
                 os.pullEvent("key")
             }
-            print(b[3])
+            print(b[2])
         end
     until not true
 end
