@@ -1,5 +1,5 @@
 require("lualib_bundle");
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 1,["6"] = 2,["7"] = 2,["8"] = 4,["9"] = 6,["10"] = 7,["11"] = 8,["12"] = 8,["13"] = 8,["14"] = 8,["15"] = 8,["16"] = 8,["17"] = 8,["20"] = 12,["21"] = 13,["22"] = 15,["24"] = 22,["26"] = 24,["27"] = 25});
+__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 1,["6"] = 2,["7"] = 2,["8"] = 3,["9"] = 5,["10"] = 6,["11"] = 7,["12"] = 7,["13"] = 7,["14"] = 7,["15"] = 7,["16"] = 7,["17"] = 7,["20"] = 11,["22"] = 26,["24"] = 14,["25"] = 16,["27"] = 23,["32"] = 27,["33"] = 28,["34"] = 29,["38"] = 32,["39"] = 33});
 local ____exports = {}
 local ____turtle = require("world.turtle")
 local Turtle = ____turtle.Turtle
@@ -18,10 +18,22 @@ if dataJson then
     end
 end
 local c = __TS__New(Client, dataJson)
-c:connectSocket()
-if c.websocket then
-else
-    print("not connected")
+do
+    local ____try, e = pcall(
+        function()
+            c:connectSocket()
+            if c.websocket then
+            else
+                print("not connected")
+            end
+        end
+    )
+    if not ____try then
+        print(e)
+        if c.websocket then
+            c.websocket:close()
+        end
+    end
 end
 if c.websocket then
     c.websocket:close()
