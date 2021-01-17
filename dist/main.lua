@@ -4,7 +4,7 @@ local ____turtle = require("world.turtle")
 local Turtle = ____turtle.Turtle
 local ____client = require("client")
 local Client = ____client.Client
-print("starting v1")
+print("starting v2")
 local dataJson = Turtle:findData()
 if dataJson then
     if __TS__StringStartsWith(dataJson, "/disk") then

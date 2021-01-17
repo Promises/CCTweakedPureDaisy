@@ -1,6 +1,6 @@
 import {Turtle} from "./world/turtle";
 import {Client} from "./client";
-print("starting v1");
+print("starting v2");
 
 let dataJson = Turtle.findData();
 
