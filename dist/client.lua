@@ -1,5 +1,4 @@
 require("lualib_bundle");
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 1,["6"] = 2,["7"] = 2,["8"] = 4,["9"] = 4,["10"] = 4,["11"] = 10,["12"] = 11,["13"] = 12,["14"] = 13,["15"] = 14,["16"] = 10,["17"] = 17,["18"] = 18,["19"] = 19,["21"] = 19,["22"] = 19,["23"] = 19,["25"] = 17,["26"] = 23,["27"] = 24,["28"] = 25,["29"] = 25,["30"] = 25,["31"] = 26,["32"] = 26,["34"] = 27,["35"] = 28,["37"] = 30,["39"] = 23});
 local ____exports = {}
 local ____turtle = require("world.turtle")
 local Turtle = ____turtle.Turtle
@@ -15,13 +14,11 @@ function Client.prototype.____constructor(self, configPath)
     self.localTurtle = __TS__New(Turtle, configPath)
 end
 function Client.prototype.listener(self)
-    while true do
-        print(
-            {
-                self.websocket:receive()
-            }
-        )
-    end
+    print(
+        {
+            self.websocket:receive()
+        }
+    )
 end
 function Client.prototype.connectSocket(self)
     local url = (("ws://" .. tostring(self.websocketAddress)) .. ":") .. tostring(self.websocketPort)

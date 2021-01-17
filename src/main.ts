@@ -1,5 +1,6 @@
 import {Turtle} from "./world/turtle";
 import {Client} from "./client";
+print("starting v1");
 
 let dataJson = Turtle.findData();
 
@@ -10,17 +11,30 @@ if(dataJson) {
 }
 
 let c = new Client(dataJson);
-c.connectSocket();
+try {
 
-if(c.websocket) {
-    parallel.waitForAll(()=> c.listener(), () => {
-        while (true) {
-            turtle.turnLeft();
-        }
-    })
+    c.connectSocket();
+
+    if (c.websocket) {
+        c.listener()
+        // parallel.waitForAll(()=> c.listener(), () => {
+        //     while (true) {
+        //         turtle.turnLeft();
+        //     }
+        // });
+    } else {
+        print("not connected")
+    }
+
+} catch (e) {
+    print(e);
+    if(c.websocket) {
+        c.websocket.close();
+    }
 }
-print("not connected")
-
+if(c.websocket) {
+    c.websocket.close();
+}
 
 
 

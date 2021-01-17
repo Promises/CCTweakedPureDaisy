@@ -1,5 +1,4 @@
 require("lualib_bundle");
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 2,["6"] = 2,["7"] = 3,["8"] = 3,["9"] = 4,["10"] = 4,["11"] = 5,["12"] = 5,["13"] = 8,["14"] = 16,["15"] = 17,["16"] = 17,["17"] = 17,["18"] = 17,["19"] = 18,["20"] = 19,["22"] = 21,["23"] = 16});
 local ____exports = {}
 ____exports.Direction = {}
 ____exports.Direction.North = 0

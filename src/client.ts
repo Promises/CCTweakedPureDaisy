@@ -1,4 +1,5 @@
-import {Turtle, WorldData} from "./world/turtle";
+import {Turtle} from "./world/turtle";
+import {loadConfigFile, WorldData} from "./world/data";
 
 export class Client {
     localTurtle: Turtle;
@@ -7,36 +8,27 @@ export class Client {
     websocketPort: number;
 
     constructor(configPath: string) {
-        const data: WorldData = Client.loadConfigFile(configPath);
+        const data: WorldData = loadConfigFile(configPath);
         this.websocketAddress = data.server;
         this.websocketPort = data.port;
         this.localTurtle = new Turtle(configPath);
     }
 
     public listener() {
-        while (true){
-            let data = this.websocket.receive();
-            print(data);
-        }
+        print(this.websocket.receive());
     }
 
     public connectSocket() {
-        let ws = http.websocket(`ws://${this.websocketAddress}"${this.websocketPort}`);
+        const url = `ws://${this.websocketAddress}:${this.websocketPort}`;
+        print("connecting to " + url);
+        let ws = http.websocket(url);
         if(ws[0]) {
             this.websocket = ws[0];
+        } else {
+            print(ws[1])
         }
     }
 
 
-    public static loadConfigFile(configFile: string): WorldData {
-        let filehandle = fs.open(configFile, 'r')[0];
-        if(filehandle) {
-            let raw = textutils.unserializeJSON(filehandle.readAll());
-            filehandle.close();
-            if(raw[0]) {
-                return raw[0];
-            }
-        }
-        return null
-    }
+
 }

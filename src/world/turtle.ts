@@ -1,30 +1,9 @@
 /** @noSelfInFile **/
 import {Block} from "../block";
-import {stringToDirection} from "./direction";
-import {Client} from "../client";
+import {Direction, stringToDirection} from "./direction";
+import {loadConfigFile} from "./data";
 
-export enum Direction {
-    North,
-    West,
-    South,
-    East,
-}
 
-export const VerboseDirection = [
-    "North",
-    "West",
-    "South",
-    "East",
-]
-
-export interface WorldData {
-    facing: 'north' | 'east' | 'south' | 'west';
-    x: number;
-    y: number;
-    z: number;
-    server: string;
-    port: number;
-}
 
 export class Turtle {
     currentX: number;
@@ -34,7 +13,7 @@ export class Turtle {
     inventory: ({ name: string, count: number } | null)[] = [];
 
     constructor(configFile: string) {
-        let worldData = Client.loadConfigFile(configFile);
+        let worldData = loadConfigFile(configFile);
         this.currentDirection = stringToDirection(worldData.facing);
         this.currentX = worldData.x;
         this.currentY = worldData.y;

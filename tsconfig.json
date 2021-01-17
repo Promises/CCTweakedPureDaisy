@@ -34,7 +34,7 @@
         "luaLibImport": "always",
         "noHeader": true,
         "noImplicitSelf": true,
-        "sourceMapTraceback": true,
+        "sourceMapTraceback": false,
 //        "luaBundle": "dist/tstl_output.lua",
 //        "luaBundleEntry": "./src/main.ts"
     }
