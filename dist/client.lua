@@ -1,5 +1,5 @@
 require("lualib_bundle");
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 3,["5"] = 3,["6"] = 3,["7"] = 11,["8"] = 15,["9"] = 15,["10"] = 15,["11"] = 16,["12"] = 17,["13"] = 17,["14"] = 17,["15"] = 17,["17"] = 18,["18"] = 19,["19"] = 20,["22"] = 24,["23"] = 25,["25"] = 11});
+__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 3,["5"] = 3,["6"] = 3,["7"] = 11,["8"] = 15,["9"] = 15,["10"] = 15,["11"] = 16,["12"] = 17,["13"] = 17,["14"] = 17,["15"] = 17,["17"] = 18,["18"] = 19,["19"] = 20,["20"] = 21,["23"] = 25,["24"] = 26,["26"] = 11});
 local ____exports = {}
 ____exports.Client = __TS__Class()
 local Client = ____exports.Client
@@ -16,7 +16,8 @@ function Client.prototype.____constructor(self, configPath)
         }
         if raw[1] then
             local data = raw[1]
-            print(data)
+            print(data.facing)
+            print(data.server)
         end
     end
     if not filehandle then
