@@ -1,10 +1,11 @@
 require("lualib_bundle");
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 1,["6"] = 2,["7"] = 2,["8"] = 3,["9"] = 5,["10"] = 6,["11"] = 7,["12"] = 7,["13"] = 7,["14"] = 7,["15"] = 7,["16"] = 7,["17"] = 7,["20"] = 11,["22"] = 26,["24"] = 14,["25"] = 16,["27"] = 23,["32"] = 27,["33"] = 28,["34"] = 29,["38"] = 32,["39"] = 33});
+__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 1,["6"] = 2,["7"] = 2,["8"] = 3,["9"] = 5,["10"] = 7,["11"] = 8,["12"] = 9,["13"] = 9,["14"] = 9,["15"] = 9,["16"] = 9,["17"] = 9,["18"] = 9,["21"] = 13,["23"] = 29,["25"] = 16,["26"] = 18,["27"] = 19,["29"] = 26,["34"] = 30,["35"] = 31,["36"] = 32,["40"] = 35,["41"] = 36});
 local ____exports = {}
 local ____turtle = require("world.turtle")
 local Turtle = ____turtle.Turtle
 local ____client = require("client")
 local Client = ____client.Client
+print("starting v1")
 local dataJson = Turtle:findData()
 if dataJson then
     if __TS__StringStartsWith(dataJson, "/disk") then
@@ -23,6 +24,7 @@ do
         function()
             c:connectSocket()
             if c.websocket then
+                c:listener()
             else
                 print("not connected")
             end
