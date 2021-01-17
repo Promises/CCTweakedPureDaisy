@@ -1,5 +1,5 @@
 require("lualib_bundle");
-__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 1,["6"] = 2,["7"] = 2,["8"] = 4,["9"] = 4,["10"] = 4,["11"] = 10,["12"] = 11,["13"] = 12,["14"] = 13,["15"] = 14,["16"] = 10,["17"] = 17,["18"] = 18,["19"] = 19,["20"] = 19,["22"] = 20,["24"] = 17,["25"] = 24,["26"] = 25,["27"] = 25,["28"] = 25,["29"] = 25,["31"] = 26,["32"] = 27,["34"] = 29,["36"] = 24});
+__TS__SourceMapTraceBack(debug.getinfo(1).short_src, {["4"] = 1,["5"] = 1,["6"] = 2,["7"] = 2,["8"] = 4,["9"] = 4,["10"] = 4,["11"] = 10,["12"] = 11,["13"] = 12,["14"] = 13,["15"] = 14,["16"] = 10,["17"] = 17,["18"] = 18,["19"] = 19,["20"] = 19,["22"] = 20,["24"] = 17,["25"] = 24,["26"] = 25,["27"] = 26,["28"] = 26,["29"] = 26,["30"] = 27,["31"] = 27,["33"] = 28,["34"] = 29,["36"] = 31,["38"] = 24});
 local ____exports = {}
 local ____turtle = require("world.turtle")
 local Turtle = ____turtle.Turtle
@@ -23,10 +23,12 @@ function Client.prototype.listener(self)
     end
 end
 function Client.prototype.connectSocket(self)
+    local url = (("ws://" .. tostring(self.websocketAddress)) .. ":") .. tostring(self.websocketPort)
+    print(
+        "connecting to " .. tostring(url)
+    )
     local ws = {
-        http.websocket(
-            (("ws://" .. tostring(self.websocketAddress)) .. ":") .. tostring(self.websocketPort)
-        )
+        http.websocket(url)
     }
     if ws[1] then
         self.websocket = ws[1]
