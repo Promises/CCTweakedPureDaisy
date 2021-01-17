@@ -31,9 +31,9 @@ function Client.prototype.listenForTerminate(self)
             local b = {
                 os.pullEvent("key")
             }
-            print(b[2])
+            key = b[2]
         end
-    until not true
+    until not (key ~= 84)
 end
 function Client.prototype.connectSocket(self)
     local url = (("ws://" .. tostring(self.websocketAddress)) .. ":") .. tostring(self.websocketPort)
