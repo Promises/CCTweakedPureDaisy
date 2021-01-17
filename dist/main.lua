@@ -28,6 +28,7 @@ if c.websocket then
             end
         end
     )
+else
+    print("not connected")
 end
-print("not connected")
 return ____exports
