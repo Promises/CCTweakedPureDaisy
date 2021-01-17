@@ -51,6 +51,9 @@ function Client.prototype.connectSocket(self)
     end
 end
 function Client.prototype.handleAction(self, receiveElement)
+    if not receiveElement then
+        return
+    end
     if receiveElement == "" then
     else
         print("Unknown action:")
