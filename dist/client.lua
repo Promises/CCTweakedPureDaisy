@@ -16,7 +16,7 @@ end
 function Client.prototype.listener(self)
     print(
         ({
-            self.websocket:receive()
+            self.websocket.receive()
         })[1]
     )
 end

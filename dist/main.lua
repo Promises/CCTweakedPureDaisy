@@ -23,7 +23,14 @@ do
         function()
             c:connectSocket()
             if c.websocket then
-                c:listener()
+                parallel.waitForAll(
+                    function() return c:listener() end,
+                    function()
+                        while true do
+                            turtle.turnLeft()
+                        end
+                    end
+                )
             else
                 print("not connected")
             end
@@ -32,11 +39,11 @@ do
     if not ____try then
         print(e)
         if c.websocket then
-            c.websocket:close()
+            c.websocket.close()
         end
     end
 end
 if c.websocket then
-    c.websocket:close()
+    c.websocket.close()
 end
 return ____exports
