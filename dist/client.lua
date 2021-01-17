@@ -48,14 +48,10 @@ function Client.prototype.connectSocket(self)
     end
 end
 function Client.prototype.handleAction(self, receiveElement)
-    local ____switch11 = receiveElement
-    goto ____switch11_case_default
-    ::____switch11_case_default::
-    do
+    if receiveElement == "" then
+    else
         print("Unknown action:")
         print(receiveElement)
-        goto ____switch11_end
     end
-    ::____switch11_end::
 end
 return ____exports
