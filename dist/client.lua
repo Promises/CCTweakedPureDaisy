@@ -28,7 +28,12 @@ function Client.prototype.listenForTerminate(self)
     local key
     repeat
         do
-            local input = os.pullEvent("key")[2]
+            local input = __TS__ObjectAssign(
+                {},
+                __TS__ArrayToObject(
+                    os.pullEvent("key")
+                )
+            )[1]
             print(
                 "" .. tostring(input)
             )
