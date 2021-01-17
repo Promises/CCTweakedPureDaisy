@@ -28,9 +28,10 @@ function Client.prototype.listenForTerminate(self)
     local key
     repeat
         do
-            local _
-            local b = os.pullEvent("key")
-            print(b)
+            local b = {
+                os.pullEvent("key")
+            }
+            print(b[3])
         end
     until not true
 end
