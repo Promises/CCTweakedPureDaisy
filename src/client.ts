@@ -15,7 +15,7 @@ export class Client {
     }
 
     public listener() {
-        print(this.websocket.receive());
+        print(this.websocket.receive()[0]);
     }
 
     public connectSocket() {

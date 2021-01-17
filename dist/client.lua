@@ -15,9 +15,9 @@ function Client.prototype.____constructor(self, configPath)
 end
 function Client.prototype.listener(self)
     print(
-        {
+        ({
             self.websocket:receive()
-        }
+        })[1]
     )
 end
 function Client.prototype.connectSocket(self)
